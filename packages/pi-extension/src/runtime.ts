@@ -247,7 +247,7 @@ export function createCavemanRuntime<M extends RoutingModel>(host: RoutingHost<M
     toolResult: guard("tool_result", async (event: ToolOutputEvent) => {
       const state = current;
       if (!state) return undefined;
-      const result = await shrinkToolResult(state.bridge, state.id, event);
+      const result = await shrinkToolResult(state.bridge, state.id, event, state.recovery);
       return current === state ? result : undefined;
     }),
     beforeCompact: guard("session_before_compact", () => {
